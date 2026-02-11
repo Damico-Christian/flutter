@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// Importiamo il file che contiene la logica delle rotte
+import 'app_router.dart'; 
 
 void main() {
   runApp(const MyApp());
@@ -9,66 +11,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            
-            // --- INIZIO MODIFICA ---
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                // Logica: Se il resto della divisione per 2 è 0 (pari) -> Verde
-                // Altrimenti (dispari) -> Rosso
-                color: _counter % 2 == 0 ? Colors.green : Colors.red, 
-              ),
-            ),
-            // --- FINE MODIFICA ---
-            
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+    // Usiamo il costruttore .router per integrare GoRouter nell'app
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'Todo App',
+      // Colleghiamo la configurazione definita in app_router.dart
+      routerConfig: appRouter, 
     );
   }
 }
